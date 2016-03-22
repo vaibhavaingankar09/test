@@ -11,7 +11,7 @@ hello
 >		return shell_exec("echo $input | $markdown_script");
 >
 
-[Google][a]
+[Google][]
 
 [Google]:	https://www.google.co.in 	"google"
 [foo]: http://example.com/  "Optional Title Here"
