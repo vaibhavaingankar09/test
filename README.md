@@ -46,7 +46,7 @@ yum install -y git \
 	libxml2 \
 	libxml2-devel \
 	expat-devel
-`
+```
 
 SLES12:
 ```
