@@ -30,7 +30,7 @@ hello
 * expat-devel (or libexpat-devel)
 
 RHEL7:
-```
+
 yum install -y git \
 	wget
 	openssl \
@@ -43,7 +43,7 @@ yum install -y git \
 	libxml2 \
 	libxml2-devel \
 	expat-devel
-```
+
 
 SLES12:
 ```
