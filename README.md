@@ -17,6 +17,10 @@ hello
 [foo]: http://example.com/  "Optional Title Here"
 
 ![image](https://www.google.co.in/images/branding/googlelogo/1x/googlelogo_color_272x92dp.png)
+
+*google*
+**Google**
+
 **Apache Http 2.4.12** has been successfully built and tested for Linux on z Systems. The following instructions can be used for RHEL 7.1 and SLES 12.
 
 ### Version
