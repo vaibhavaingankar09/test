@@ -26,4 +26,7 @@
   - three
     - four
       - five
+      [1]. six
+      [2]. seven
+[1]. eight
 
