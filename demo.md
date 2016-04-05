@@ -1,7 +1,7 @@
 # Building Chef Server Omnibus on Ubuntu
 
 1. Install the dependencies 
-	  apt-get install -y git ruby-dev ruby make build-essential patch libreadline6-dev libreadlibe6 bzip2 tar wget curl libxml2-dev openjdk-7-jre openjdk-7-jdk vim 
+			apt-get install -y git ruby-dev ruby make build-essential patch libreadline6-dev libreadlibe6 bzip2 tar wget curl libxml2-dev openjdk-7-jre openjdk-7-jdk vim 
 
 2. Build Ruby from source
 
