@@ -192,3 +192,69 @@
 				make "rel", env: env
 
 		**Note:** We don't directly edit the *relx.config* file as it is updated each time the build is run, but simply remove the *hipe* dependency at build time with the two additional *command* lines above
+		
+	10. Update opscode-solr4.rb
+
+			vi files/private-chef-cookbooks/private-chef/recipes/opscode-solr4.rb
+
+		Apache Solr is relies on a non-standard option -Xloggc which doesn't exist on IBM's JDK, however there is an equivalent -Xverbosegclog so we replace it as below:
+
+			# Enable GC Logging (very useful for debugging issues)
+			node.default['private_chef']['opscode-solr4']['command'] << " -Xverbosegclog:#{File.join(solr_log_dir, "gclog.log")} -verbose:gc -XX:+PrintHeapAtGC -XX:+PrintGCTimeStamps -XX:+PrintGCDetails -XX:+PrintGCApplicationStoppedTime -XX:+PrintGCApplicationConcurrentTime -XX:+PrintTenuringDistribution"
+			
+		**Note:** All we have done is replaced *-Xloggc* with *-Xverbosegclog*
+	
+	11. Update old_postgres_cleanup.rb
+
+			vi files/private-chef-cookbooks/private-chef/recipes/old_postgres_cleanup.rb
+			
+		postgres has changed name between chef versions to postgresql, however the cleanup script doesn't correctly handle a new installation situation so we add a simple check to prevent errors during installation
+
+			runit_service "postgres" do
+				action [:stop, :disable]
+				not_if { not File.exist?('/opt/opscode/service/postgres') }
+			end
+
+		**Note:** The issue is only when attempting to stop a non-existant *postgres* service, so we only protect that *runit_service* call
+		
+	12. Update ncurses.rb
+
+			cp ../../omnibus-software/config/software/ncurses.rb config/software/.
+			vi config/software/ncurses.rb
+
+		Like earlier items the download site for ncurses no longer provides this specific version, to fix this simply change the default version to be downloaded as below:
+
+			name "ncurses"
+			default_version "5.9"
+	
+			dependency "libtool" if aix?
+			dependency "patch" if solaris2?
+
+		**Note:** The only change is to the *default_version* in order to download *5.9* rather than *5.9-20150530*
+	
+7. Install or stub fakeroot and build Chef Server Omnibus
+
+	You may already have fakeroot available on your system, but if not (and as we are building as root) you can use the following to temporarily stub fakeroot:
+
+		echo '"$@"' > /usr/bin/fakeroot
+		chmod +x /usr/bin/fakeroot
+	
+	**Note:** Don't forget to remove the fakeroot script after the build has completed
+
+		bin/omnibus build chef-server
+
+	**Note:** Occasionally during the download phase there will be errors similar to *...net_fetcher.rb:180:in 'each': comparison of NilClass with 861 failed (ArgumentError)...,* if you see these just start the build process again and it should download the second time.
+
+	Once this completes your built RPM will be in the *pkg* subdirectory.
+
+	If you wanted to clean your build process and start again you can do some of the following:
+
+		bin/omnibus clean chef-server
+		# or #
+		bin/omnibus clean chef-server --purge
+	
+	These will clean the build tree in the first case and purge the downloaded files in the second (causing it to redownload everything). Removing the git cache is a little more direct:
+
+		rm -rf /var/cache/omnibus/cache/git_cache/
+	
+	Which will cause the build process to rebuild everything even if nothing has changed.
