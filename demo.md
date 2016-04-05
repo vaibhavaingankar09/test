@@ -33,4 +33,4 @@
 		gem 'json'
 		gem 'json_pure'
 	
-***Note:** Add the json and json_pure gems on all platforms, but ONLY change the gem 'omnibus' line on SLES platforms*
+	**Note:** Add the json and json_pure gems on all platforms, but ONLY change the gem 'omnibus' line on SLES platforms
