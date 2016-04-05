@@ -25,4 +25,12 @@
 		cd omnibus
 		vi Gemfile
 	
-
+	Update the Gemfile to add a couple of missing Gems (and on SLES only point omnibus to the git repo downloaded earlier)
+	
+		gem 'omnibus', path: '/<source_root>/omnibus'
+		gem 'omnibus-software', github: 'opscode/omnibus-software'
+		gem 'rake'
+		gem 'json'
+		gem 'json_pure'
+	
+	* **Note:** Add the json and json_pure gems on all platforms, but ONLY change the gem 'omnibus' line on SLES platforms*
