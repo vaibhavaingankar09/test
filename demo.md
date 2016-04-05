@@ -8,21 +8,21 @@
 
 3. Correct the gem environment and install the bundler
 	
-	export GEM_HOME=/home/<USER>/.gem/ruby
-	export PATH=$GEM_HOME/bin:$PATH
-	gem install bundler
+		export GEM_HOME=/home/<USER>/.gem/ruby
+		export PATH=$GEM_HOME/bin:$PATH
+		gem install bundler
 	
 4. Download the build process code
 	
-	cd /<source_root>/
-	git clone https://github.com/chef/omnibus-software
-	git clone https://github.com/chef/chef-server
+		cd /<source_root>/
+		git clone https://github.com/chef/omnibus-software
+		git clone https://github.com/chef/chef-server
 
 5. Checkout the required version of Chef Server and download Ruby Gems requirements
 
-	cd chef-server/
-	git checkout 12.1.2
-	cd omnibus
-	vi Gemfile
+		cd chef-server/
+		git checkout 12.1.2
+		cd omnibus
+		vi Gemfile
 	
 
