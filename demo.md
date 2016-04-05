@@ -33,7 +33,7 @@
 		gem 'json'
 		gem 'json_pure'
 	
-	**Note:** Add the *json* and *json_pure* gems.
+	**Note:** Add the 		json and *json_pure* gems.
 	
 	Finally install the build time Gems
 
